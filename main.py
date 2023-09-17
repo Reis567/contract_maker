@@ -2,6 +2,13 @@ from fpdf import FPDF
 import tkinter as tk
 import re
 
+
+def validar_numero_e_letra(texto):
+    # Use uma expressão regular para verificar se o texto contém apenas números e letras
+    pattern = r'^[a-zA-Z0-9]+$'
+    return re.match(pattern, texto) is not None
+
+
 def validar_data(data):
     pattern = r'^\d{2}/\d{2}/\d{4}$'
     return re.match(pattern, data)
@@ -47,7 +54,9 @@ def gerar_contrato():
         data_assinatura = data_assinatura_entry.get().upper()
         nomearquivo_label = nome_arquivo_entry.get()
 
-
+        if not validar_numero_e_letra(nomearquivo_label):
+            resultado_label.config(text="Nome de arquivo inválido , use somente letras e números ")
+            return
 
         if not validar_texto(nome_locatario):
             resultado_label.config(text="Nome do Locatario inválido , tente somente texto")
