@@ -5,7 +5,6 @@ import re
 
 
 def validar_numero_e_letra(texto):
-    # Use uma expressão regular para verificar se o texto contém apenas números e letras
     pattern = r'^[a-zA-Z0-9]+$'
     return re.match(pattern, texto) is not None
 
@@ -258,7 +257,12 @@ data_assinatura_entry.pack(pady=10)
 
 # Botão estilizado
 estilo_botao = ttk.Style()
-estilo_botao.configure("Estilo.TButton", padding=10)
+estilo_botao.configure("Estilo.TButton",
+                       padding=10,
+                       font=("Helvetica", 12),                       
+                       borderwidth=0,
+                       )
+
 
 botao = ttk.Button(janela, text="Gerar Contrato",
                    command=gerar_contrato, style="Estilo.TButton")
