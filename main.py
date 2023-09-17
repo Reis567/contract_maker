@@ -275,3 +275,4 @@ resultado_label.pack()
 # Iniciar a interface do tkinter
 if __name__ == "__main__":
     janela.mainloop()
+    
