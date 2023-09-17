@@ -40,7 +40,7 @@ class PDF(FPDF):
 
     def chapter_body(self, body):
         self.set_font('Times', '', 10)
-        self.multi_cell(0, 6, body.encode(
+        self.multi_cell(0, 4, body.encode(
             'latin-1', 'replace').decode('latin-1'))
         self.ln(1)
 
@@ -109,7 +109,7 @@ def gerar_contrato():
         pdf.add_page()
 
         corpo_contrato = f"""
-NOMELOCADORAQUI, CPF CPFLOCADORAQUI, IDENTIDADE IDENTIDADELOCADORAQUI, residente a RUALOCADOR LOTE Nª, BAIRRO , CIDADE  ESTADO PAÍS doravante denominado LOCADOR: {nome_locatario}  ,CPF {cpf_locatario} , IDENTIDADE {identidade_locatario} doravante denominado LOCATÁRIO, celebram o presente contrato de locação residencial, com as cláusulas e condições seguintes: 
+NOMELOCADORAQUI, CPF CPFLOCADORAQUI, IDENTIDADE IDENTIDADELOCADORAQUI, residente a RUALOCADOR LOTE Nª, BAIRRO , CIDADE  ESTADO PAÍS doravante denominado LOCATARIO: {nome_locatario}  ,CPF {cpf_locatario} , IDENTIDADE {identidade_locatario} doravante denominado LOCATÁRIO, celebram o presente contrato de locação residencial, com as cláusulas e condições seguintes:
 
 1) O LOCADOR cede para locação residencial ao LOCATÁRIO, o imóvel situado à {endereco_locacao},.
 
