@@ -1,6 +1,22 @@
 from fpdf import FPDF
 import tkinter as tk
+import re
 
+def validar_data(data):
+    pattern = r'^\d{2}/\d{2}/\d{4}$'
+    return re.match(pattern, data)
+
+def validar_valor(valor):
+    pattern = r'^\d{1,}\,\d{2}$'
+    return re.match(pattern, valor)
+
+def validar_texto(texto):
+    pattern = r'^[A-Za-zÀ-ú\s]+$'
+    return re.match(pattern, texto)
+
+def validar_numeros(numeros):
+    pattern = r'^[\d/-]+$'
+    return re.match(pattern,numeros)
 
 class PDF(FPDF):
     def header(self):
@@ -20,10 +36,9 @@ class PDF(FPDF):
 
 def gerar_contrato():
     try:
-        # Coletar dados dos campos
-        nome_locador = nome_locador_entry.get().upper()
-        cpf_locador = cpf_locador_entry.get().upper()
-        identidade_locador = identidade_locador_entry.get().upper()
+        nome_locatario = nome_locatario_entry.get().upper()
+        cpf_locatario = cpf_locatario_entry.get().upper()
+        identidade_locatario = identidade_locatario_entry.get().upper()
         endereco_locacao = endereco_locacao_entry.get().upper()
         data_inicio = data_inicio_entry.get().upper()
         valor_numeral = valor_numeral_entry.get().upper()
@@ -31,6 +46,42 @@ def gerar_contrato():
         dia_vencimento = dia_vencimento_entry.get().upper()
         data_assinatura = data_assinatura_entry.get().upper()
         nomearquivo_label = nome_arquivo_entry.get()
+
+
+
+        if not validar_texto(nome_locatario):
+            resultado_label.config(text="Nome do Locatario inválido , tente somente texto")
+            return
+        
+        if not validar_numeros(cpf_locatario):
+            resultado_label.config(text="CPF do Locatario inválido, tente somente números e símbolos")
+            return
+        
+        if not validar_numeros(identidade_locatario):
+            resultado_label.config(text="Identidade do Locatario inválido, tente somente números e símbolos")
+            return
+        
+        if not validar_data(data_inicio):
+            resultado_label.config(text="Data errada, tente no formato correto")
+            return
+        
+        if not validar_numeros(valor_numeral):
+            resultado_label.config(text="Valor inválido, tente somente números")
+            return
+        
+        if not validar_texto(valor_discurso):
+            resultado_label.config(text="Valor inválido, tente somente texto")
+            return
+        
+        if not validar_numeros(dia_vencimento):
+            resultado_label.config(text="Dia inválido, tente somente números")
+            return
+
+        if not validar_data(data_assinatura):
+            resultado_label.config(text="Data errada, tente no formato correto")
+            return
+        
+
         # Nome do arquivo PDF de saída
         nome_arquivo = f"{nomearquivo_label}.pdf"
 
@@ -39,7 +90,7 @@ def gerar_contrato():
         pdf.add_page()
 
         corpo_contrato = f"""
-NOMELOCADORAQUI, CPF CPFLOCADORAQUI, IDENTIDADE IDENTIDADELOCADORAQUI, residente a RUALOCADOR LOTE Nª, BAIRRO , CIDADE  ESTADO PAÍS doravante denominado LOCADOR: {nome_locador}  ,CPF {cpf_locador} , IDENTIDADE {identidade_locador} doravante denominado LOCATÁRIO, celebram o presente contrato de locação residencial, com as cláusulas e condições seguintes: 
+NOMELOCADORAQUI, CPF CPFLOCADORAQUI, IDENTIDADE IDENTIDADELOCADORAQUI, residente a RUALOCADOR LOTE Nª, BAIRRO , CIDADE  ESTADO PAÍS doravante denominado LOCADOR: {nome_locatario}  ,CPF {cpf_locatario} , IDENTIDADE {identidade_locatario} doravante denominado LOCATÁRIO, celebram o presente contrato de locação residencial, com as cláusulas e condições seguintes: 
 
 1) O LOCADOR cede para locação residencial ao LOCATÁRIO, o imóvel situado à {endereco_locacao},.
 
@@ -122,17 +173,17 @@ nome_arquivo_entry = tk.Entry(janela)
 nome_arquivo_entry.pack()
 
 # Criar e posicionar os campos do tkinter
-tk.Label(janela, text="Nome do Locador:").pack()
-nome_locador_entry = tk.Entry(janela)
-nome_locador_entry.pack()
+tk.Label(janela, text="Nome do Locatário:").pack()
+nome_locatario_entry = tk.Entry(janela)
+nome_locatario_entry.pack()
 
-tk.Label(janela, text="CPF do Locador:").pack()
-cpf_locador_entry = tk.Entry(janela)
-cpf_locador_entry.pack()
+tk.Label(janela, text="CPF do Locatario:").pack()
+cpf_locatario_entry = tk.Entry(janela)
+cpf_locatario_entry.pack()
 
-tk.Label(janela, text="Identidade do Locador:").pack()
-identidade_locador_entry = tk.Entry(janela)
-identidade_locador_entry.pack()
+tk.Label(janela, text="Identidade do Locatario:").pack()
+identidade_locatario_entry = tk.Entry(janela)
+identidade_locatario_entry.pack()
 
 tk.Label(janela, text="Endereço de Locação:").pack()
 endereco_locacao_entry = tk.Entry(janela)
