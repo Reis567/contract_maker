@@ -1,5 +1,6 @@
 from fpdf import FPDF
 import tkinter as tk
+from tkinter import ttk
 import re
 
 
@@ -13,17 +14,21 @@ def validar_data(data):
     pattern = r'^\d{2}/\d{2}/\d{4}$'
     return re.match(pattern, data)
 
+
 def validar_valor(valor):
     pattern = r'^\d{1,}\,\d{2}$'
     return re.match(pattern, valor)
+
 
 def validar_texto(texto):
     pattern = r'^[A-Za-zÀ-ú\s]+$'
     return re.match(pattern, texto)
 
+
 def validar_numeros(numeros):
     pattern = r'^[\d/-]+$'
-    return re.match(pattern,numeros)
+    return re.match(pattern, numeros)
+
 
 class PDF(FPDF):
     def header(self):
@@ -55,41 +60,47 @@ def gerar_contrato():
         nomearquivo_label = nome_arquivo_entry.get()
 
         if not validar_numero_e_letra(nomearquivo_label):
-            resultado_label.config(text="Nome de arquivo inválido , use somente letras e números ")
+            resultado_label.config(
+                text="Nome de arquivo inválido , use somente letras e números ")
             return
 
         if not validar_texto(nome_locatario):
-            resultado_label.config(text="Nome do Locatario inválido , tente somente texto")
+            resultado_label.config(
+                text="Nome do Locatario inválido , tente somente texto")
             return
-        
+
         if not validar_numeros(cpf_locatario):
-            resultado_label.config(text="CPF do Locatario inválido, tente somente números e símbolos")
+            resultado_label.config(
+                text="CPF do Locatario inválido, tente somente números e símbolos")
             return
-        
+
         if not validar_numeros(identidade_locatario):
-            resultado_label.config(text="Identidade do Locatario inválido, tente somente números e símbolos")
+            resultado_label.config(
+                text="Identidade do Locatario inválido, tente somente números e símbolos")
             return
-        
+
         if not validar_data(data_inicio):
-            resultado_label.config(text="Data errada, tente no formato correto")
+            resultado_label.config(
+                text="Data errada, tente no formato correto")
             return
-        
+
         if not validar_numeros(valor_numeral):
-            resultado_label.config(text="Valor inválido, tente somente números")
+            resultado_label.config(
+                text="Valor inválido, tente somente números")
             return
-        
+
         if not validar_texto(valor_discurso):
             resultado_label.config(text="Valor inválido, tente somente texto")
             return
-        
+
         if not validar_numeros(dia_vencimento):
             resultado_label.config(text="Dia inválido, tente somente números")
             return
 
         if not validar_data(data_assinatura):
-            resultado_label.config(text="Data errada, tente no formato correto")
+            resultado_label.config(
+                text="Data errada, tente no formato correto")
             return
-        
 
         # Nome do arquivo PDF de saída
         nome_arquivo = f"{nomearquivo_label}.pdf"
@@ -175,57 +186,88 @@ LOCATÁRIO : ______________________
 # Iniciar a interface do tkinter
 janela = tk.Tk()
 janela.title("Gerador de Contrato")
-janela.geometry("500x500")
+janela.geometry("600x870")
 
-tk.Label(janela, text="Nome do arquivo:").pack()
-nome_arquivo_entry = tk.Entry(janela)
-nome_arquivo_entry.pack()
+# Centralizar horizontalmente todos os elementos
+janela.grid_columnconfigure(0, weight=1)
 
-# Criar e posicionar os campos do tkinter
-tk.Label(janela, text="Nome do Locatário:").pack()
-nome_locatario_entry = tk.Entry(janela)
-nome_locatario_entry.pack()
+# Título
+titulo_label = tk.Label(janela, text="Gerador de Contrato",
+                        font=("Helvetica", 26, "bold"))
+titulo_label.pack(pady=20)  # Espaçamento entre o título e os elementos abaixo
 
-tk.Label(janela, text="CPF do Locatario:").pack()
-cpf_locatario_entry = tk.Entry(janela)
-cpf_locatario_entry.pack()
+# Nome do arquivo
+label_nome_arquivo = tk.Label(janela, text="Nome do arquivo:", font=("Helvetica", 12, "bold"))
+label_nome_arquivo.pack()
+nome_arquivo_entry = ttk.Entry(janela, style="Estilo.TEntry")
+nome_arquivo_entry.pack(pady=10)
 
-tk.Label(janela, text="Identidade do Locatario:").pack()
-identidade_locatario_entry = tk.Entry(janela)
-identidade_locatario_entry.pack()
+# Nome do Locatário
+label_nome_locatario = tk.Label(janela, text="Nome do Locatário:", font=("Helvetica", 12, "bold"))
+label_nome_locatario.pack()
+nome_locatario_entry = ttk.Entry(janela, style="Estilo.TEntry")
+nome_locatario_entry.pack(pady=10)
 
-tk.Label(janela, text="Endereço de Locação:").pack()
-endereco_locacao_entry = tk.Entry(janela)
-endereco_locacao_entry.pack()
+# CPF do Locatário
+label_cpf_locatario = tk.Label(janela, text="CPF do Locatário:", font=("Helvetica", 12, "bold"))
+label_cpf_locatario.pack()
+cpf_locatario_entry = ttk.Entry(janela, style="Estilo.TEntry")
+cpf_locatario_entry.pack(pady=10)
 
-tk.Label(janela, text="Data de Início (ex : 30/11/2000) :").pack()
-data_inicio_entry = tk.Entry(janela)
-data_inicio_entry.pack()
+# Identidade do Locatário
+label_identidade_locatario = tk.Label(janela, text="Identidade do Locatário:", font=("Helvetica", 12, "bold"))
+label_identidade_locatario.pack()
+identidade_locatario_entry = ttk.Entry(janela, style="Estilo.TEntry")
+identidade_locatario_entry.pack(pady=10)
 
-tk.Label(janela, text="Valor Numeral (ex : 1000,00) :").pack()
-valor_numeral_entry = tk.Entry(janela)
-valor_numeral_entry.pack()
+# Endereço de Locação
+label_endereco_locacao = tk.Label(janela, text="Endereço de Locação:", font=("Helvetica", 12, "bold"))
+label_endereco_locacao.pack()
+endereco_locacao_entry = ttk.Entry(janela, style="Estilo.TEntry")
+endereco_locacao_entry.pack(pady=10)
 
-tk.Label(janela, text="Valor por Extenso (ex : MIL REAIS)  :").pack()
-valor_discurso_entry = tk.Entry(janela)
-valor_discurso_entry.pack()
+# Data de Início
+label_data_inicio = tk.Label(janela, text="Data de Início (ex: 30/11/2000):", font=("Helvetica", 12, "bold"))
+label_data_inicio.pack()
+data_inicio_entry = ttk.Entry(janela, style="Estilo.TEntry")
+data_inicio_entry.pack(pady=10)
 
-tk.Label(janela, text="Dia de Vencimento (ex : 25) :").pack()
-dia_vencimento_entry = tk.Entry(janela)
-dia_vencimento_entry.pack()
+# Valor Numeral
+label_valor_numeral = tk.Label(janela, text="Valor Numeral (ex: 1000,00):", font=("Helvetica", 12, "bold"))
+label_valor_numeral.pack()
+valor_numeral_entry = ttk.Entry(janela, style="Estilo.TEntry")
+valor_numeral_entry.pack(pady=10)
 
-tk.Label(janela, text="Data da Assinatura (ex : 30/11/2000) :").pack()
-data_assinatura_entry = tk.Entry(janela)
-data_assinatura_entry.pack()
+# Valor por Extenso
+label_valor_discurso = tk.Label(janela, text="Valor por Extenso (ex: MIL REAIS):", font=("Helvetica", 12, "bold"))
+label_valor_discurso.pack()
+valor_discurso_entry = ttk.Entry(janela, style="Estilo.TEntry")
+valor_discurso_entry.pack(pady=10)
 
-# Botão para gerar o contrato
-tk.Button(janela, text="Gerar Contrato", command=gerar_contrato).pack()
+# Dia de Vencimento
+label_dia_vencimento = tk.Label(janela, text="Dia de Vencimento (ex: 25):", font=("Helvetica", 12, "bold"))
+label_dia_vencimento.pack()
+dia_vencimento_entry = ttk.Entry(janela, style="Estilo.TEntry")
+dia_vencimento_entry.pack(pady=10)
+
+# Data da Assinatura
+label_data_assinatura = tk.Label(janela, text="Data da Assinatura (ex: 30/11/2000):", font=("Helvetica", 12, "bold"))
+label_data_assinatura.pack()
+data_assinatura_entry = ttk.Entry(janela, style="Estilo.TEntry")
+data_assinatura_entry.pack(pady=10)
+
+# Botão estilizado
+estilo_botao = ttk.Style()
+estilo_botao.configure("Estilo.TButton", padding=10)
+
+botao = ttk.Button(janela, text="Gerar Contrato",
+                   command=gerar_contrato, style="Estilo.TButton")
+botao.pack(pady=20)
 
 # Label para mostrar o resultado
-resultado_label = tk.Label(janela, text="")
+resultado_label = tk.Label(janela, text="", font=("Helvetica", 12))
 resultado_label.pack()
 
 # Iniciar a interface do tkinter
-
 if __name__ == "__main__":
     janela.mainloop()
