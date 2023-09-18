@@ -185,7 +185,7 @@ LOCATÁRIO : ______________________
 # Iniciar a interface do tkinter
 janela = tk.Tk()
 janela.title("Gerador de Contrato")
-janela.geometry("600x870")
+janela.geometry("600x800")
 
 # Centralizar horizontalmente todos os elementos
 janela.grid_columnconfigure(0, weight=1)
@@ -199,61 +199,61 @@ titulo_label.pack(pady=20)  # Espaçamento entre o título e os elementos abaixo
 label_nome_arquivo = tk.Label(janela, text="Nome do arquivo:", font=("Helvetica", 12, "bold"))
 label_nome_arquivo.pack()
 nome_arquivo_entry = ttk.Entry(janela, style="Estilo.TEntry")
-nome_arquivo_entry.pack(pady=10)
+nome_arquivo_entry.pack(pady=7)
 
 # Nome do Locatário
 label_nome_locatario = tk.Label(janela, text="Nome do Locatário:", font=("Helvetica", 12, "bold"))
 label_nome_locatario.pack()
 nome_locatario_entry = ttk.Entry(janela, style="Estilo.TEntry")
-nome_locatario_entry.pack(pady=10)
+nome_locatario_entry.pack(pady=7)
 
 # CPF do Locatário
 label_cpf_locatario = tk.Label(janela, text="CPF do Locatário:", font=("Helvetica", 12, "bold"))
 label_cpf_locatario.pack()
 cpf_locatario_entry = ttk.Entry(janela, style="Estilo.TEntry")
-cpf_locatario_entry.pack(pady=10)
+cpf_locatario_entry.pack(pady=7)
 
 # Identidade do Locatário
 label_identidade_locatario = tk.Label(janela, text="Identidade do Locatário:", font=("Helvetica", 12, "bold"))
 label_identidade_locatario.pack()
 identidade_locatario_entry = ttk.Entry(janela, style="Estilo.TEntry")
-identidade_locatario_entry.pack(pady=10)
+identidade_locatario_entry.pack(pady=7)
 
 # Endereço de Locação
 label_endereco_locacao = tk.Label(janela, text="Endereço de Locação:", font=("Helvetica", 12, "bold"))
 label_endereco_locacao.pack()
 endereco_locacao_entry = ttk.Entry(janela, style="Estilo.TEntry")
-endereco_locacao_entry.pack(pady=10)
+endereco_locacao_entry.pack(pady=7)
 
 # Data de Início
 label_data_inicio = tk.Label(janela, text="Data de Início (ex: 30/11/2000):", font=("Helvetica", 12, "bold"))
 label_data_inicio.pack()
 data_inicio_entry = ttk.Entry(janela, style="Estilo.TEntry")
-data_inicio_entry.pack(pady=10)
+data_inicio_entry.pack(pady=7)
 
 # Valor Numeral
 label_valor_numeral = tk.Label(janela, text="Valor Numeral (ex: 1000,00):", font=("Helvetica", 12, "bold"))
 label_valor_numeral.pack()
 valor_numeral_entry = ttk.Entry(janela, style="Estilo.TEntry")
-valor_numeral_entry.pack(pady=10)
+valor_numeral_entry.pack(pady=7)
 
 # Valor por Extenso
 label_valor_discurso = tk.Label(janela, text="Valor por Extenso (ex: MIL REAIS):", font=("Helvetica", 12, "bold"))
 label_valor_discurso.pack()
 valor_discurso_entry = ttk.Entry(janela, style="Estilo.TEntry")
-valor_discurso_entry.pack(pady=10)
+valor_discurso_entry.pack(pady=7)
 
 # Dia de Vencimento
 label_dia_vencimento = tk.Label(janela, text="Dia de Vencimento (ex: 25):", font=("Helvetica", 12, "bold"))
 label_dia_vencimento.pack()
 dia_vencimento_entry = ttk.Entry(janela, style="Estilo.TEntry")
-dia_vencimento_entry.pack(pady=10)
+dia_vencimento_entry.pack(pady=7)
 
 # Data da Assinatura
 label_data_assinatura = tk.Label(janela, text="Data da Assinatura (ex: 30/11/2000):", font=("Helvetica", 12, "bold"))
 label_data_assinatura.pack()
 data_assinatura_entry = ttk.Entry(janela, style="Estilo.TEntry")
-data_assinatura_entry.pack(pady=10)
+data_assinatura_entry.pack(pady=7)
 
 # Botão estilizado
 estilo_botao = ttk.Style()
